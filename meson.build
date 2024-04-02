@@ -275,6 +275,24 @@ if not png_opt.disabled()
   endif
 endif
 
+gif_opt = get_option('gif')
+if not gif_opt.disabled()
+  enabled_loaders += 'gif'
+endif
+
+others_opt = get_option('others')
+if not others_opt.disabled()
+  enabled_loaders += 'bmp'
+  enabled_loaders += 'ico'
+  enabled_loaders += 'ani'
+  enabled_loaders += 'pnm'
+  enabled_loaders += 'xpm'
+  enabled_loaders += 'xbm'
+  enabled_loaders += 'tga'
+  enabled_loaders += 'icns'
+  enabled_loaders += 'qtif'
+endif
+
 # On Windows, check whether we are building the native Windows loaders
 # (it is an "all-or-nothing" option for BMP, EMF, GIF, ICO, JPEG, TIFF and WMF)
 # Note that we currently do not use the native Windows loaders to handle PNG and

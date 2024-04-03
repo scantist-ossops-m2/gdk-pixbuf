@@ -282,15 +282,18 @@ endif
 
 others_opt = get_option('others')
 if not others_opt.disabled()
-  enabled_loaders += 'bmp'
-  enabled_loaders += 'ico'
-  enabled_loaders += 'ani'
-  enabled_loaders += 'pnm'
-  enabled_loaders += 'xpm'
-  enabled_loaders += 'xbm'
-  enabled_loaders += 'tga'
-  enabled_loaders += 'icns'
-  enabled_loaders += 'qtif'
+  # Keep sorted alphabetically
+  enabled_loaders += [
+    'ani',
+    'bmp',
+    'icns',
+    'ico',
+    'pnm',
+    'qtif',
+    'tga',
+    'xbm',
+    'xpm',
+  ]
 endif
 
 # On Windows, check whether we are building the native Windows loaders

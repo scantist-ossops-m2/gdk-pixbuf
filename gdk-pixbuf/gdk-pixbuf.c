@@ -331,7 +331,6 @@ gdk_pixbuf_new (GdkColorspace colorspace,
 	guchar *buf;
 	int channels;
 	int rowstride;
-        gsize bytes;
 
 	g_return_val_if_fail (colorspace == GDK_COLORSPACE_RGB, NULL);
 	g_return_val_if_fail (bits_per_sample == 8, NULL);
@@ -346,11 +345,7 @@ gdk_pixbuf_new (GdkColorspace colorspace,
 	/* Always align rows to 32-bit boundaries */
 	rowstride = (rowstride + 3) & ~3;
 
-        bytes = height * rowstride;
-        if (bytes / rowstride !=  height) /* overflow */
-                return NULL;
-            
-	buf = g_try_malloc (bytes);
+	buf = g_try_malloc_n (height, rowstride);
 	if (!buf)
 		return NULL;
 
@@ -385,7 +380,7 @@ gdk_pixbuf_copy (const GdkPixbuf *pixbuf)
 	size = ((pixbuf->height - 1) * pixbuf->rowstride +
 		pixbuf->width * ((pixbuf->n_channels * pixbuf->bits_per_sample + 7) / 8));
 
-	buf = g_try_malloc (size * sizeof (guchar));
+	buf = g_try_malloc (size);
 	if (!buf)
 		return NULL;
 
